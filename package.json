@@ -7,8 +7,7 @@
   "type": "module",
   "main": "page.js",
   "scripts": {
-    "test": "mocha --timeout 60000 \"test.js\"",
-    "test:headed": "MOCHA_HEADFUL=1 mocha --timeout 60000 \"tests/**/*.test.js\""
+    "test:lab1": "mocha --timeout 60000 \"lab1/test.js\""
   },
   "dependencies": {
     "dotenv": "^17.2.1",
