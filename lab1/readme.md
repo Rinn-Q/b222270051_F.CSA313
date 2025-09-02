@@ -39,9 +39,12 @@ cd lab1-selenium
 ## .env файл үүсгэх
 
 Төслийн үндсэн хавтсанд .env файл үүсгэж доорх мэдээллийг оруулна:
+
+```bash
 BASE_URL=https://student.must.edu.mn
 MUST_USER=your_username
 MUST_PASS=your_password
+```
 
 Анхаар: your_username болон your_password-ыг өөрийн ШУТИС-ийн оюутны код, нууц үгээр солино.
 
