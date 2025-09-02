@@ -1,0 +1,21 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "page.js",
+  "scripts": {
+    "test": "mocha --timeout 60000 \"test.js\"",
+    "test:headed": "MOCHA_HEADFUL=1 mocha --timeout 60000 \"tests/**/*.test.js\""
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "selenium-webdriver": "^4.35.0"
+  },
+  "devDependencies": {
+    "chai": "^6.0.1",
+    "mocha": "^11.7.2"
+  }
+}
