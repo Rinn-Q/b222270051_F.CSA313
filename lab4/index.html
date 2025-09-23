@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>User Info</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      #user-info {
+        margin-top: 20px;
+
+        border: 1px solid #d3d3d3;
+
+        padding: 10px;
+
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>User Information</h1>
+
+    <input
+      type="number"
+      id="user-id"
+      placeholder="Enter User ID (1-3)"
+      min="1"
+      max="3"
+    />
+
+    <button id="fetch-user">Get User Info</button>
+
+    <div id="user-info">
+      <h2 id="user-name"></h2>
+
+      <p id="user-email"></p>
+    </div>
+
+    <script>
+      document
+        .getElementById("fetch-user")
+        .addEventListener("click", function () {
+          const userId = document.getElementById("user-id").value;
+
+          fetch(
+            `https://8fdff57f-1bfa-4d26-9a2b-c5eb19723954.mock.pstmn.io/api/user/${userId}`
+          )
+            .then((response) => response.json())
+
+            .then((data) => {
+              document.getElementById("user-name").innerText =
+                "Name: " + data.name;
+
+              document.getElementById("user-email").innerText =
+                "Email: " + data.email;
+
+              document.getElementById("user-info").style.display = "block";
+            })
+
+            .catch((error) =>
+              console.error("Error fetching user info:", error)
+            );
+        });
+    </script>
+  </body>
+</html>
