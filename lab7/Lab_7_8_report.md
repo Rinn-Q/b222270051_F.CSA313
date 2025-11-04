@@ -104,38 +104,38 @@ ant clean compile compile-tests coverage
 
 #### CalendarTest (7 tests, 2 failures, 2 errors)
 
-- ✅ `testAddMeeting_holiday` - Амжилттай
-- ✅ `testPrintAgenda_includesMeeting` - Амжилттай
-- ✅ `testInvalidInputs_throw` - Амжилттай
-- ❌ `testAddMeeting_nonOverlapping_ok` - **ERROR**: NullPointerException (`getDescription()` returns null)
-- ❌ `testAddMeeting_overlapping_throws` - **ERROR**: NullPointerException (`getDescription()` returns null)
-- ❌ `testClearSchedule_emptiesDay` - **FAILED**: Unexpected exception "Meeting starts before it ends"
-- ❌ `testDecemberIsValidMonth_expectedBehavior` - **FAILED**: December should be valid but throws "Month does not exist"
+- `testAddMeeting_holiday` - Амжилттай
+- `testPrintAgenda_includesMeeting` - Амжилттай
+- `testInvalidInputs_throw` - Амжилттай
+- `testAddMeeting_nonOverlapping_ok` - **ERROR**: NullPointerException (`getDescription()` returns null)
+- `testAddMeeting_overlapping_throws` - **ERROR**: NullPointerException (`getDescription()` returns null)
+- `testClearSchedule_emptiesDay` - **FAILED**: Unexpected exception "Meeting starts before it ends"
+- `testDecemberIsValidMonth_expectedBehavior` - **FAILED**: December should be valid but throws "Month does not exist"
 
 #### MeetingTest (3 tests, 0 failures, 0 errors)
 
-- ✅ `testGettersSetters` - Амжилттай
-- ✅ `testToString_includesFields` - Амжилттай
-- ✅ `testAttendeeAddRemove` - Амжилттай
+- `testGettersSetters` - Амжилттай
+- `testToString_includesFields` - Амжилттай
+- `testAttendeeAddRemove` - Амжилттай
 
 #### OrganizationTest (4 tests, 0 failures, 0 errors)
 
-- ✅ `testGetEmployee_success` - Амжилттай
-- ✅ `testGetRoom_notFound_throws` - Амжилттай
-- ✅ `testGetEmployee_notFound_throws` - Амжилттай
-- ✅ `testGetRoom_success` - Амжилттай
+- `testGetEmployee_success` - Амжилттай
+- `testGetRoom_notFound_throws` - Амжилттай
+- `testGetEmployee_notFound_throws` - Амжилттай
+- `testGetRoom_success` - Амжилттай
 
 #### PersonTest (3 tests, 0 failures, 2 errors)
 
-- ✅ `testPrintAgenda_containsMeeting` - Амжилттай
-- ❌ `testAddMeeting_conflictMessageIncludesName` - **ERROR**: NullPointerException (`getDescription()` returns null)
-- ❌ `testIsBusy_delegatesToCalendar` - **ERROR**: TimeConflictException "Meeting starts before it ends"
+- `testPrintAgenda_containsMeeting` - Амжилттай
+- `testAddMeeting_conflictMessageIncludesName` - **ERROR**: NullPointerException (`getDescription()` returns null)
+- `testIsBusy_delegatesToCalendar` - **ERROR**: TimeConflictException "Meeting starts before it ends"
 
 #### RoomTest (3 tests, 0 failures, 2 errors)
 
-- ✅ `testPrintAgenda_containsMeeting` - Амжилттай
-- ❌ `testAddMeeting_conflictMessageIncludesRoom` - **ERROR**: NullPointerException (`getDescription()` returns null)
-- ❌ `testIsBusy_delegatesToCalendar` - **ERROR**: TimeConflictException "Meeting starts before it ends"
+- `testPrintAgenda_containsMeeting` - Амжилттай
+- `testAddMeeting_conflictMessageIncludesRoom` - **ERROR**: NullPointerException (`getDescription()` returns null)
+- `testIsBusy_delegatesToCalendar` - **ERROR**: TimeConflictException "Meeting starts before it ends"
 
 ## Код хамрах хүрээ (Code Coverage)
 
