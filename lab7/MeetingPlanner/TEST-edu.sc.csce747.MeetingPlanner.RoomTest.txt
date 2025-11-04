@@ -1,0 +1,27 @@
+Testsuite: edu.sc.csce747.MeetingPlanner.RoomTest
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.08 sec
+
+Testcase: testPrintAgenda_containsMeeting took 0.048 sec
+Testcase: testAddMeeting_conflictMessageIncludesRoom took 0.006 sec
+	Caused an ERROR
+Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+	at edu.sc.csce747.MeetingPlanner.Calendar.addMeeting(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.Room.addMeeting(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.RoomTest.testAddMeeting_conflictMessageIncludesRoom(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+Testcase: testIsBusy_delegatesToCalendar took 0.003 sec
+	Caused an ERROR
+Meeting starts before it ends.
+edu.sc.csce747.MeetingPlanner.TimeConflictException: Meeting starts before it ends.
+	at edu.sc.csce747.MeetingPlanner.Calendar.checkTimes(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.Calendar.isBusy(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.Room.isBusy(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.RoomTest.testIsBusy_delegatesToCalendar(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+

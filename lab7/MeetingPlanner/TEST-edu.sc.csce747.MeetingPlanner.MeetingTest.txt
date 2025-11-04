@@ -1,0 +1,6 @@
+Testsuite: edu.sc.csce747.MeetingPlanner.MeetingTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 sec
+
+Testcase: testGettersSetters took 0.01 sec
+Testcase: testToString_includesFields took 0.018 sec
+Testcase: testAttendeeAddRemove took 0 sec

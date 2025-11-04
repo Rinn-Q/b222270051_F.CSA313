@@ -1,0 +1,44 @@
+Testsuite: edu.sc.csce747.MeetingPlanner.CalendarTest
+Tests run: 7, Failures: 2, Errors: 2, Skipped: 0, Time elapsed: 0.072 sec
+
+Testcase: testAddMeeting_nonOverlapping_ok took 0.011 sec
+	Caused an ERROR
+Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+	at edu.sc.csce747.MeetingPlanner.Calendar.addMeeting(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.CalendarTest.testAddMeeting_nonOverlapping_ok(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+Testcase: testAddMeeting_holiday took 0 sec
+Testcase: testPrintAgenda_includesMeeting took 0.023 sec
+Testcase: testAddMeeting_overlapping_throws took 0 sec
+	Caused an ERROR
+Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "edu.sc.csce747.MeetingPlanner.Meeting.getDescription()" is null
+	at edu.sc.csce747.MeetingPlanner.Calendar.addMeeting(Unknown Source)
+	at edu.sc.csce747.MeetingPlanner.CalendarTest.testAddMeeting_overlapping_throws(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+Testcase: testClearSchedule_emptiesDay took 0.001 sec
+	FAILED
+Unexpected exception: Meeting starts before it ends.
+junit.framework.AssertionFailedError: Unexpected exception: Meeting starts before it ends.
+	at edu.sc.csce747.MeetingPlanner.CalendarTest.testClearSchedule_emptiesDay(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+Testcase: testInvalidInputs_throw took 0 sec
+Testcase: testDecemberIsValidMonth_expectedBehavior took 0.001 sec
+	FAILED
+December should be a valid month: Month does not exist.
+junit.framework.AssertionFailedError: December should be a valid month: Month does not exist.
+	at edu.sc.csce747.MeetingPlanner.CalendarTest.testDecemberIsValidMonth_expectedBehavior(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
