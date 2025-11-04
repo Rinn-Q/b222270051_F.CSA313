@@ -85,7 +85,7 @@
 ### Тест ажиллуулах командууд
 
 ```bash
-cd /Users/tsundgerhenmacbook/Documents/Lessons/CSA313/jaggi/b222270051_F.CSA313/lab7/MeetingPlanner
+cd /lab7/MeetingPlanner
 ant clean compile compile-tests coverage
 ```
 
@@ -214,7 +214,7 @@ ant clean compile compile-tests coverage
 ### Ant ашиглан (санал болгож буй)
 
 ```bash
-cd /Users/tsundgerhenmacbook/Documents/Lessons/CSA313/jaggi/b222270051_F.CSA313/lab7/MeetingPlanner
+cd /lab7/MeetingPlanner
 
 # Бүх тестүүдийг ажиллуулах + Coverage report үүсгэх
 ant clean compile compile-tests coverage
@@ -234,7 +234,7 @@ Coverage report-ийг `coverage/report/index.html` дээр харах боло
 ### Командын мөрөөр (JUnit Console)
 
 ```bash
-cd /Users/tsundgerhenmacbook/Documents/Lessons/CSA313/jaggi/b222270051_F.CSA313/lab7/MeetingPlanner
+cd /lab7/MeetingPlanner
 curl -L -o lib/junit-platform-console-standalone-1.9.3.jar \
   https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
 
