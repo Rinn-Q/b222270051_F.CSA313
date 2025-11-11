@@ -1,0 +1,123 @@
+<project name="MeetingPlanner" default="run-tests" basedir=".">
+    <!-- Folder configurations -->
+    <property name="src.main" value="src/main/java"/>
+    <property name="src.test" value="src/test/java"/>
+    <property name="build" value="build"/>
+    <property name="docs" value="doc"/>
+    <property name="lib" value="lib"/>
+    <property name="coverage.dir" value="coverage"/>
+ 
+    <!-- ===== JaCoCo task registration ===== -->
+    <path id="jacoco.classpath">
+        <fileset dir="${lib}">
+            <include name="jacocoant.jar"/>
+        </fileset>
+    </path>
+ 
+    <taskdef uri="antlib:org.jacoco.ant"
+             resource="org/jacoco/ant/antlib.xml"
+             classpathref="jacoco.classpath" />
+ 
+    <!-- Clean target -->
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${docs}"/>
+        <delete dir="${coverage.dir}"/>
+    </target>
+ 
+    <!-- Compile main source files -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${build}/main"/>
+        <javac srcdir="${src.main}" destdir="${build}/main" includeantruntime="false">
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+ 
+    <!-- Compile test source files -->
+    <target name="compile-tests" depends="compile">
+        <mkdir dir="${build}/test"/>
+        <javac srcdir="${src.test}" destdir="${build}/test" includeantruntime="false">
+            <classpath>
+                <pathelement path="${build}/main"/>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+ 
+    <!-- Generate Javadoc -->
+    <target name="javadoc" depends="compile">
+        <mkdir dir="${docs}"/>
+        <javadoc sourcepath="${src.main}" destdir="${docs}" author="true" version="true" use="true"
+                 windowtitle="MeetingPlanner API"/>
+    </target>
+ 
+    <!-- Run JUnit tests (coverage-гүй энгийн гүйлт) -->
+    <target name="run-tests" depends="compile-tests">
+        <junit printsummary="yes" haltonfailure="false" fork="true">
+            <classpath>
+                <pathelement path="${build}/main"/>
+                <pathelement path="${build}/test"/>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+            <batchtest>
+                <fileset dir="${src.test}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+ 
+    <!-- ===== Coverage-тэй test + Report ===== -->
+    <target name="coverage" depends="compile-tests" description="Run tests with JaCoCo and generate HTML/XML reports">
+        <mkdir dir="${coverage.dir}"/>
+ 
+        <!-- 1) JUnit-ээ JaCoCo агенттай ажиллуулах -->
+        <jacoco:coverage destfile="${coverage.dir}/jacoco.exec" xmlns:jacoco="antlib:org.jacoco.ant">
+            <junit printsummary="on" haltonfailure="false" fork="true">
+                <classpath>
+                    <pathelement path="${build}/main"/>
+                    <pathelement path="${build}/test"/>
+                    <fileset dir="${lib}">
+                        <include name="**/*.jar"/>
+                    </fileset>
+                </classpath>
+                <formatter type="plain"/>
+                <batchtest>
+                    <fileset dir="${src.test}">
+                        <include name="**/*Test.java"/>
+                    </fileset>
+                </batchtest>
+            </junit>
+        </jacoco:coverage>
+ 
+        <!-- 2) Coverage тайлан үүсгэх (HTML/XML/CSV) -->
+        <jacoco:report xmlns:jacoco="antlib:org.jacoco.ant">
+            <executiondata>
+                <file file="${coverage.dir}/jacoco.exec"/>
+            </executiondata>
+            <structure name="MeetingPlanner">
+                <classfiles>
+                    <!-- Coverage-ээс Main болон Exception классуудыг хасна -->
+                    <fileset dir="${build}/main">
+                        <exclude name="**/PlannerInterface.class"/>
+                        <exclude name="**/TimeConflictException.class"/>
+                    </fileset>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src.main}"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="${coverage.dir}/report"/>
+            <xml  destfile="${coverage.dir}/report/jacoco.xml"/>
+            <csv  destfile="${coverage.dir}/report/jacoco.csv"/>
+        </jacoco:report>
+    </target>
+</project>

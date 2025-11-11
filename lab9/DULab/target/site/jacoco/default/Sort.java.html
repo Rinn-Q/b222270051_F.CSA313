@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sort.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dulab</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Sort.java</span></div><h1>Sort.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">public class Sort {</span>
+    public void merge(int arr[], int left, int middle, int right) {
+<span class="fc" id="L3">        int low = middle - left + 1;</span>
+<span class="fc" id="L4">        int high = right - middle;</span>
+
+<span class="fc" id="L6">        int[] L = new int[low];</span>
+<span class="fc" id="L7">        int[] R = new int[high];</span>
+
+<span class="fc bfc" id="L9" title="All 2 branches covered.">        for (int i = 0; i &lt; low; i++)</span>
+<span class="fc" id="L10">            L[i] = arr[left + i];</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        for (int j = 0; j &lt; high; j++)</span>
+<span class="fc" id="L12">            R[j] = arr[middle + 1 + j];</span>
+
+<span class="fc" id="L14">        int i = 0, j = 0, k = left;</span>
+<span class="fc bfc" id="L15" title="All 4 branches covered.">        while (i &lt; low &amp;&amp; j &lt; high) {</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">            if (L[i] &lt;= R[j]) arr[k++] = L[i++];</span>
+<span class="fc" id="L17">            else arr[k++] = R[j++];</span>
+        }
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        while (i &lt; low) arr[k++] = L[i++];</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        while (j &lt; high) arr[k++] = R[j++];</span>
+<span class="fc" id="L21">    }</span>
+
+    public void mergeSort(int arr[], int left, int right) {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (left &lt; right) {</span>
+<span class="fc" id="L25">            int middle = (left + right) / 2;</span>
+<span class="fc" id="L26">            mergeSort(arr, left, middle);</span>
+<span class="fc" id="L27">            mergeSort(arr, middle + 1, right);</span>
+<span class="fc" id="L28">            merge(arr, left, middle, right);</span>
+        }
+<span class="fc" id="L30">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
