@@ -1,11 +1,25 @@
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SortTest {
 
     @Test
-    @DisplayName("TC1 – Хоосон массив")
+    void testSortedArray() {
+        Sort sort = new Sort();
+        int[] arr = {1, 2, 3, 4, 5};
+        sort.mergeSort(arr, 0, arr.length - 1);
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, arr);
+    }
+
+    @Test
+    void testReverseArray() {
+        Sort sort = new Sort();
+        int[] arr = {9, 7, 5, 3, 1};
+        sort.mergeSort(arr, 0, arr.length - 1);
+        assertArrayEquals(new int[]{1, 3, 5, 7, 9}, arr);
+    }
+
+    @Test
     void testEmptyArray() {
         Sort sort = new Sort();
         int[] arr = {};
@@ -14,29 +28,18 @@ public class SortTest {
     }
 
     @Test
-    @DisplayName("TC2 – Нэг элементтэй массив")
-    void testSingleElementArray() {
+    void testSingleElement() {
         Sort sort = new Sort();
-        int[] arr = {5};
+        int[] arr = {42};
         sort.mergeSort(arr, 0, arr.length - 1);
-        assertArrayEquals(new int[]{5}, arr);
+        assertArrayEquals(new int[]{42}, arr);
     }
 
     @Test
-    @DisplayName("TC3 – Хоёр элементтэй массив")
-    void testTwoElementsArray() {
+    void testDuplicateValues() {
         Sort sort = new Sort();
-        int[] arr = {5, 2};
+        int[] arr = {4, 2, 4, 2, 4};
         sort.mergeSort(arr, 0, arr.length - 1);
-        assertArrayEquals(new int[]{2, 5}, arr);
-    }
-
-    @Test
-    @DisplayName("TC4 – Олон элементтэй массив")
-    void testMultipleElementsArray() {
-        Sort sort = new Sort();
-        int[] arr = {9, 3, 1, 5, 13, 12};
-        sort.mergeSort(arr, 0, arr.length - 1);
-        assertArrayEquals(new int[]{1, 3, 5, 9, 12, 13}, arr);
+        assertArrayEquals(new int[]{2, 2, 4, 4, 4}, arr);
     }
 }
