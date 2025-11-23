@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Elevator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">elevator-fsm</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Elevator.java</span></div><h1>Elevator.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.TreeSet;
+
+public class Elevator {
+
+<span class="fc" id="L7">    public enum State { IDLE, MOVING_UP, MOVING_DOWN, DOOR_OPEN }</span>
+
+    private State state;
+    private int currentFloor;
+    private final int minFloor;
+    private final int maxFloor;
+
+    // Хүсэлтүүд
+<span class="fc" id="L15">    private final TreeSet&lt;Integer&gt; requestsUp = new TreeSet&lt;&gt;();</span>
+<span class="fc" id="L16">    private final TreeSet&lt;Integer&gt; requestsDown = new TreeSet&lt;&gt;();</span>
+
+<span class="fc" id="L18">    public Elevator(int minFloor, int maxFloor, int initialFloor) {</span>
+<span class="pc bpc" id="L19" title="2 of 4 branches missed.">        if (initialFloor &lt; minFloor || initialFloor &gt; maxFloor)</span>
+<span class="nc" id="L20">            throw new IllegalArgumentException(&quot;initial floor out of range&quot;);</span>
+<span class="fc" id="L21">        this.minFloor = minFloor;</span>
+<span class="fc" id="L22">        this.maxFloor = maxFloor;</span>
+<span class="fc" id="L23">        this.currentFloor = initialFloor;</span>
+<span class="fc" id="L24">        this.state = State.IDLE;</span>
+<span class="fc" id="L25">    }</span>
+
+<span class="fc" id="L27">    public State getState() { return state; }</span>
+<span class="fc" id="L28">    public int getCurrentFloor() { return currentFloor; }</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">    public boolean isDoorOpen() { return state == State.DOOR_OPEN; }</span>
+    public boolean hasPendingRequests() {
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">        return !requestsUp.isEmpty() || !requestsDown.isEmpty();</span>
+    }
+
+    private void validateFloor(int floor) {
+<span class="fc bfc" id="L35" title="All 4 branches covered.">        if (floor &lt; minFloor || floor &gt; maxFloor)</span>
+<span class="fc" id="L36">            throw new IllegalArgumentException(&quot;floor out of range&quot;);</span>
+<span class="fc" id="L37">    }</span>
+
+    // ----------------------
+    //  REQUEST METHODS
+    // ----------------------
+
+    public void selectFloor(int floor) {
+<span class="fc" id="L44">        validateFloor(floor);</span>
+<span class="pc bpc" id="L45" title="1 of 4 branches missed.">        if (state == State.DOOR_OPEN &amp;&amp; floor == currentFloor) return;</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (floor &gt; currentFloor) requestsUp.add(floor);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        else if (floor &lt; currentFloor) requestsDown.add(floor);</span>
+
+<span class="fc" id="L50">        tryStartMoving();</span>
+<span class="fc" id="L51">    }</span>
+
+    public void callUp(int floor) {
+<span class="fc" id="L54">        validateFloor(floor);</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (floor &gt;= currentFloor) requestsUp.add(floor);</span>
+<span class="nc" id="L56">        else requestsDown.add(floor);</span>
+<span class="fc" id="L57">        tryStartMoving();</span>
+<span class="fc" id="L58">    }</span>
+
+    public void callDown(int floor) {
+<span class="fc" id="L61">        validateFloor(floor);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (floor &lt;= currentFloor) requestsDown.add(floor);</span>
+<span class="nc" id="L63">        else requestsUp.add(floor);</span>
+<span class="fc" id="L64">        tryStartMoving();</span>
+<span class="fc" id="L65">    }</span>
+
+    // ----------------------
+    //  MOVEMENT LOGIC
+    // ----------------------
+
+    public void stepOnce() {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (state == State.DOOR_OPEN) return;</span>
+<span class="nc" id="L73">        startNextRequest();</span>
+<span class="nc" id="L74">    }</span>
+
+    private void tryStartMoving() {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (state == State.IDLE) startNextRequest();</span>
+<span class="fc" id="L78">    }</span>
+
+    private void startNextRequest() {
+<span class="fc" id="L81">        Integer next = null;</span>
+
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (!requestsUp.isEmpty())</span>
+<span class="fc" id="L84">            next = requestsUp.first();       // хамгийн бага up</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        else if (!requestsDown.isEmpty())</span>
+<span class="fc" id="L86">            next = requestsDown.last();      // хамгийн их down</span>
+
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (next == null) {</span>
+<span class="nc" id="L89">            state = State.IDLE;</span>
+<span class="nc" id="L90">            return;</span>
+        }
+
+<span class="fc" id="L93">        moveTo(next);</span>
+<span class="fc" id="L94">    }</span>
+
+    private void moveTo(int floor) {
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if (state == State.DOOR_OPEN) return;</span>
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (floor &gt; currentFloor) state = State.MOVING_UP;</span>
+<span class="fc" id="L100">        else state = State.MOVING_DOWN;</span>
+
+<span class="fc" id="L102">        currentFloor = floor;</span>
+
+        // хүрмэгц хүсэлтийг арилгана
+<span class="fc" id="L105">        requestsUp.remove(floor);</span>
+<span class="fc" id="L106">        requestsDown.remove(floor);</span>
+
+<span class="fc" id="L108">        state = State.DOOR_OPEN;</span>
+<span class="fc" id="L109">    }</span>
+
+    // ----------------------
+    //  DOOR EVENTS
+    // ----------------------
+
+    public void doorClose() {
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (state != State.DOOR_OPEN) return;</span>
+
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (hasPendingRequests()) {</span>
+<span class="fc" id="L119">            state = State.IDLE; // Idle → tryStartMoving() шиг ажиллана</span>
+<span class="fc" id="L120">            startNextRequest();</span>
+<span class="fc" id="L121">        } else {</span>
+<span class="fc" id="L122">            state = State.IDLE;</span>
+        }
+<span class="fc" id="L124">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
